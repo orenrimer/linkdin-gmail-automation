@@ -87,6 +87,6 @@ if __name__ == '__main__':
     if jobs_link:
         bot = Bot(jobs_link)
         bot.login(password)
-        print("Opened Job Alert page.")
+        print("Opened job alert page.")
     else:
-        print("No new Job Alrets Found.")
+        print("No new job alerts found.")
