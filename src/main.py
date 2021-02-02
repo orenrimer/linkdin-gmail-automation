@@ -8,7 +8,7 @@ import os.path
 
 
 # If modifying these scopes, delete the file token.pickle.
-# You need to download the 'credentials.json' file from here: https://developers.google.com/gmail/api/quickstart/python
+# You need to download the 'credentials.json' file from here: https://developers.google.com/gmail/api/quickstart/python and clciking "Enable the Gmail API"
 # In thee first run, you will need to give the app permissions, then token.pickle will be created automatically.
 
 
