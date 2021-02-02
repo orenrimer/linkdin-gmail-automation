@@ -87,7 +87,6 @@ class Bot:
 
     def verify(self):
         self.wait.until(EC.url_changes)
-        print(self.driver.current_url)
         return 'jobs/search/' in self.driver.current_url
 
 
