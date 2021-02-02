@@ -96,9 +96,9 @@ if __name__ == '__main__':
     password = ""  # Your linkedin password
     jobs_link = check_new_email()
     if jobs_link:
-        b = Bot(jobs_link)
-        b.login(password)
-        if b.verify():
+        bot = Bot(jobs_link)
+        bot.login(password)
+        if bot.verify():
             print("Opened job alert page.")
         else:
             raise Exception("Failed to open job sea page.")
