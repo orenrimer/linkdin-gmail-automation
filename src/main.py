@@ -84,8 +84,8 @@ if __name__ == '__main__':
     password = ""  # Your linkedin password
     jobs_link = check_new_email()
     if jobs_link:
-        b = Bot(jobs_link)
-        b.login(password)
+        bot = Bot(jobs_link)
+        bot.login(password)
         print("Opened Job Alert page")
     else:
         raise Exception("Filed to extract link from message.")
