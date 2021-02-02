@@ -13,6 +13,7 @@ install the required packages from the requirements.txt using:
 pip install -r requirements.txt
 ```
 
-You need to download the 'credentials.json' file from here: https://developers.google.com/gmail/api/quickstart/python and clciking "Enable the Gmail API"
+You need to download the 'credentials.json' file from here: https://developers.google.com/gmail/api/quickstart/python <br>
+and clciking "Enable the Gmail API"
 
 In the first run, you will need to give the app permissions, then token.pickle will be created automatically.
