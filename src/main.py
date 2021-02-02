@@ -2,15 +2,18 @@ import base64
 from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver import Firefox
 import pickle
 import os.path
 
 
-# If modifying these scopes, delete the file token.pickle.
-# You need to download the 'credentials.json' file from here: https://developers.google.com/gmail/api/quickstart/python and clciking "Enable the Gmail API"
-# In thee first run, you will need to give the app permissions, then token.pickle will be created automatically.
 
+
+# If modifying these scopes, delete the file token.pickle.
+# You need to download the 'credentials.json' file from here: https://developers.google.com/gmail/api/quickstart/python
+# In thee first run, you will need to give the app permissions, then token.pickle will be created automatically.
 
 SCOPES = ['https://www.googleapis.com/auth/gmail.modify']
 
@@ -50,7 +53,7 @@ def check_new_email(max_results=10):
             for header in headers:
                 if header['name'] == 'From':
                     if header['value'] == 'LinkedIn Job Alerts <jobalerts-noreply@linkedin.com>':
-                        print("Found New Job Alert Mail")
+                        print("Found a new job alert!")
                         service.users().messages().modify(
                             userId='me', id=message_id,
                             body={'addLabelIds': [],
@@ -63,16 +66,17 @@ def check_new_email(max_results=10):
                         for line in lines:
                             if 'See all jobs on LinkedIn:' in line:
                                 link = line.split('//')[1]
-                                break
-                            if not link:
-                                raise Exception("Failed to extract link from massage")
+                        if not link:
+                            raise Exception("Failed to extract link from massage")
                         return link
     return None
+
 
 
 class Bot:
     def __init__(self, jobs_link):
         self.driver = Firefox()
+        self.wait = WebDriverWait(self.driver, poll_frequency=0.5, timeout=15)
         self.driver.maximize_window()
         self.driver.get("https://" + jobs_link)
         self.driver.implicitly_wait(5)
@@ -81,14 +85,22 @@ class Bot:
         self.driver.find_element_by_id('password').send_keys(password)
         self.driver.find_element_by_xpath("//button[@type='submit']").click()
 
+    def verify(self):
+        self.wait.until(EC.url_changes)
+        print(self.driver.current_url)
+        return 'jobs/search/' in self.driver.current_url
+
 
 
 if __name__ == '__main__':
     password = ""  # Your linkedin password
     jobs_link = check_new_email()
     if jobs_link:
-        bot = Bot(jobs_link)
-        bot.login(password)
-        print("Opened job alert page.")
+        b = Bot(jobs_link)
+        b.login(password)
+        if b.verify():
+            print("Opened job alert page.")
+        else:
+            raise Exception("Failed to open job sea page.")
     else:
         print("No new job alerts found.")
