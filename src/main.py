@@ -89,4 +89,4 @@ if __name__ == '__main__':
         bot.login(password)
         print("Opened Job Alert page.")
     else:
-        print("No new Job Alrets Found.)
+        print("No new Job Alrets Found.")
