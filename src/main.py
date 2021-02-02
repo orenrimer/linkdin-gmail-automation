@@ -87,5 +87,3 @@ if __name__ == '__main__':
         bot = Bot(jobs_link)
         bot.login(password)
         print("Opened Job Alert page")
-    else:
-        raise Exception("Filed to extract link from message.")
