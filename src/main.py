@@ -63,6 +63,7 @@ def check_new_email(max_results=10):
                         for line in lines:
                             if 'See all jobs on LinkedIn:' in line:
                                 link = line.split('//')[1]
+                                break
                         return link
     return None
 
