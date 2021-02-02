@@ -64,6 +64,8 @@ def check_new_email(max_results=10):
                             if 'See all jobs on LinkedIn:' in line:
                                 link = line.split('//')[1]
                                 break
+                            if not link:
+                                raise Exception("Failed to extract link from massage")
                         return link
     return None
 
