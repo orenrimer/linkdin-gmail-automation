@@ -101,6 +101,6 @@ if __name__ == '__main__':
         if bot.verify():
             print("Opened job alert page.")
         else:
-            raise Exception("Failed to open job sea page.")
+            raise Exception("Failed to open job search page.")
     else:
         print("No new job alerts found.")
