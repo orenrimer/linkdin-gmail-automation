@@ -1,4 +1,4 @@
-# linkdin-job-alert-automation
+# linkdin-gmail-automation 
 
 
 A short script to check your job alerts from LinkedIn using Python and Selenium Webdriver, connecting to Gmail REST API.<br>
